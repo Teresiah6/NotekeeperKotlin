@@ -2,6 +2,7 @@ package com.example.android.notekeeperkt
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,14 +24,16 @@ class NoteListActivity : AppCompatActivity() {
 
         listItems.layoutManager = LinearLayoutManager(this)
 
-
-
+        listItems.adapter = NoteRecyclerAdapter(this, DataManager.notes)
 
 
     }
 
     override fun onPostResume() {
         super.onPostResume()
+        // efficient for small data sets
+        listItems.adapter?.notifyDataSetChanged()
+
     }
 
 }
